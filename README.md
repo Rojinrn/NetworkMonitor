@@ -13,6 +13,6 @@ Moniroring Network State with NWPathMonitor using RXSwift & Combine
 
 ### Manual
 
-Add the NWPathMonitor+Combine.swift & NWInterface+Extension.swift on your project if using Combine.
+Add the NWPathMonitor+Combine.swiftt on your project if using Combine.
 
-Add the RXNetworkMonitor.swift & NWInterface+Extension.swift on your project if using RXSwift.
+Add the RXNetworkMonitor.swift on your project if using RXSwift.
