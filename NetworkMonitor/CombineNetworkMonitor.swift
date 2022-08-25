@@ -15,27 +15,37 @@ final class CombineNetworkMonitor {
     private let queue = DispatchQueue(label: "CombineNetworkMonitorQueue")
     private let monitor: NWPathMonitor
     
-    public private(set) var isConnected = PassthroughSubject<Bool, Never>()
-    public private(set) var currentConnectionType = PassthroughSubject<NWInterface.InterfaceType, Never>()
-    
+    public private(set) var connectivityStatus = PassthroughSubject<ConnectivityStatus, Never>()
+
     private init() {
         monitor = NWPathMonitor()
     }
     
+    // Starts monitoring connectivity changes
     public func startMonitoring() {
+
         monitor.pathUpdateHandler = { [weak self] path in
+            guard let self = self else { return }
             DispatchQueue.main.async {
-                self?.isConnected.send(path.status == .satisfied)
-                
-                guard let interface = NWInterface.InterfaceType.allCases.filter({ path.usesInterfaceType($0) }).first else { return }
-                self?.currentConnectionType.send(interface)
+                self.connectivityStatus.send(self.getConnectivityFrom(status: path.status))
             }
         }
+        
         monitor.start(queue: queue)
     }
     
     public func stopMonitoring() {
         monitor.cancel()
+    }
+    
+    // Converts NWPath.Status into ConnectivityStatus
+    private func getConnectivityFrom(status: NWPath.Status) -> ConnectivityStatus {
+        switch status {
+        case .satisfied: return .connected
+        case .unsatisfied: return .disconnected
+        case .requiresConnection: return .requiresConnection
+        @unknown default: fatalError()
+        }
     }
     
 }

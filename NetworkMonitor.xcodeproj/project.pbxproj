@@ -15,7 +15,9 @@
 		2004E99028B5FB8C00851C00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2004E98E28B5FB8C00851C00 /* LaunchScreen.storyboard */; };
 		2004E99828B5FC4C00851C00 /* RXNetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2004E99728B5FC4C00851C00 /* RXNetworkMonitor.swift */; };
 		2004E99A28B635DD00851C00 /* CombineNetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2004E99928B635DD00851C00 /* CombineNetworkMonitor.swift */; };
-		2004E99C28B6424400851C00 /* NWInterface+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2004E99B28B6424400851C00 /* NWInterface+Extension.swift */; };
+		20C7CCDF28B7C2130014BEFF /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C7CCDD28B7C2130014BEFF /* UIApplication+Extension.swift */; };
+		20C7CCE428B7C2640014BEFF /* ApplicationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C7CCE228B7C2640014BEFF /* ApplicationServiceProtocol.swift */; };
+		20C7CCE528B7C2640014BEFF /* NetworkAvailableService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C7CCE328B7C2640014BEFF /* NetworkAvailableService.swift */; };
 		E54A0DD1C060E9676EE0177C /* Pods_NetworkMonitor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0E6E9D1F881DA0B60BA9BF /* Pods_NetworkMonitor.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,7 +32,9 @@
 		2004E99128B5FB8C00851C00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2004E99728B5FC4C00851C00 /* RXNetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RXNetworkMonitor.swift; sourceTree = "<group>"; };
 		2004E99928B635DD00851C00 /* CombineNetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineNetworkMonitor.swift; sourceTree = "<group>"; };
-		2004E99B28B6424400851C00 /* NWInterface+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NWInterface+Extension.swift"; sourceTree = "<group>"; };
+		20C7CCDD28B7C2130014BEFF /* UIApplication+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
+		20C7CCE228B7C2640014BEFF /* ApplicationServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationServiceProtocol.swift; sourceTree = "<group>"; };
+		20C7CCE328B7C2640014BEFF /* NetworkAvailableService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkAvailableService.swift; sourceTree = "<group>"; };
 		93FFD3E21CCC3F41E2D0B247 /* Pods-NetworkMonitor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetworkMonitor.debug.xcconfig"; path = "Target Support Files/Pods-NetworkMonitor/Pods-NetworkMonitor.debug.xcconfig"; sourceTree = "<group>"; };
 		B1B7BAF6F07555E04ECC228E /* Pods-NetworkMonitor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetworkMonitor.release.xcconfig"; path = "Target Support Files/Pods-NetworkMonitor/Pods-NetworkMonitor.release.xcconfig"; sourceTree = "<group>"; };
 		CE0E6E9D1F881DA0B60BA9BF /* Pods_NetworkMonitor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NetworkMonitor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,8 +73,9 @@
 		2004E98228B5FB8B00851C00 /* NetworkMonitor */ = {
 			isa = PBXGroup;
 			children = (
-				2004E98328B5FB8B00851C00 /* AppDelegate.swift */,
-				2004E98528B5FB8B00851C00 /* SceneDelegate.swift */,
+				20C7CCE628B7C27F0014BEFF /* App */,
+				20C7CCE128B7C2640014BEFF /* Services */,
+				20C7CCDC28B7C2130014BEFF /* Extensions */,
 				2004E98728B5FB8B00851C00 /* ViewController.swift */,
 				2004E98928B5FB8B00851C00 /* Main.storyboard */,
 				2004E98C28B5FB8C00851C00 /* Assets.xcassets */,
@@ -78,9 +83,34 @@
 				2004E99128B5FB8C00851C00 /* Info.plist */,
 				2004E99728B5FC4C00851C00 /* RXNetworkMonitor.swift */,
 				2004E99928B635DD00851C00 /* CombineNetworkMonitor.swift */,
-				2004E99B28B6424400851C00 /* NWInterface+Extension.swift */,
 			);
 			path = NetworkMonitor;
+			sourceTree = "<group>";
+		};
+		20C7CCDC28B7C2130014BEFF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				20C7CCDD28B7C2130014BEFF /* UIApplication+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		20C7CCE128B7C2640014BEFF /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				20C7CCE228B7C2640014BEFF /* ApplicationServiceProtocol.swift */,
+				20C7CCE328B7C2640014BEFF /* NetworkAvailableService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		20C7CCE628B7C27F0014BEFF /* App */ = {
+			isa = PBXGroup;
+			children = (
+				2004E98328B5FB8B00851C00 /* AppDelegate.swift */,
+				2004E98528B5FB8B00851C00 /* SceneDelegate.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 		9658041966745EE3F8F35784 /* Pods */ = {
@@ -216,11 +246,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2004E98828B5FB8B00851C00 /* ViewController.swift in Sources */,
+				20C7CCE428B7C2640014BEFF /* ApplicationServiceProtocol.swift in Sources */,
 				2004E99828B5FC4C00851C00 /* RXNetworkMonitor.swift in Sources */,
 				2004E99A28B635DD00851C00 /* CombineNetworkMonitor.swift in Sources */,
 				2004E98428B5FB8B00851C00 /* AppDelegate.swift in Sources */,
-				2004E99C28B6424400851C00 /* NWInterface+Extension.swift in Sources */,
 				2004E98628B5FB8B00851C00 /* SceneDelegate.swift in Sources */,
+				20C7CCE528B7C2640014BEFF /* NetworkAvailableService.swift in Sources */,
+				20C7CCDF28B7C2130014BEFF /* UIApplication+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

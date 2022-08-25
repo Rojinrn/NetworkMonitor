@@ -7,7 +7,13 @@
 
 import Foundation
 import Network
-import RxSwift
+import RxRelay
+
+enum ConnectivityStatus {
+    case connected
+    case disconnected
+    case requiresConnection
+}
 
 final class RXNetworkMonitor {
     static let shared = RXNetworkMonitor()
@@ -15,27 +21,37 @@ final class RXNetworkMonitor {
     private let queue = DispatchQueue(label: "RXNetworkMonitorQueue")
     private let monitor: NWPathMonitor
     
-    public private(set) var isConnected = PublishSubject<Bool>()
-    public private(set) var currentConnectionType = PublishSubject<NWInterface.InterfaceType>()
+    public private(set) var connectivityStatus = PublishRelay<ConnectivityStatus>()
     
     private init() {
         monitor = NWPathMonitor()
     }
     
+    // Starts monitoring connectivity changes
     public func startMonitoring() {
+        
         monitor.pathUpdateHandler = { [weak self] path in
+            guard let self = self else { return }
             DispatchQueue.main.async {
-                self?.isConnected.onNext(path.status == .satisfied)
-                
-                guard let interface = NWInterface.InterfaceType.allCases.filter({ path.usesInterfaceType($0) }).first else { return }
-                self?.currentConnectionType.onNext(interface)
+                self.connectivityStatus.accept(self.getConnectivityFrom(status: path.status))
             }
         }
+        
         monitor.start(queue: queue)
     }
     
     public func stopMonitoring() {
         monitor.cancel()
+    }
+    
+    // Converts NWPath.Status into ConnectivityStatus
+    private func getConnectivityFrom(status: NWPath.Status) -> ConnectivityStatus {
+        switch status {
+        case .satisfied: return .connected
+        case .unsatisfied: return .disconnected
+        case .requiresConnection: return .requiresConnection
+        @unknown default: fatalError()
+        }
     }
     
 }
