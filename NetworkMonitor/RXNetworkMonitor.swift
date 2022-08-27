@@ -9,12 +9,6 @@ import Foundation
 import Network
 import RxRelay
 
-enum ConnectivityStatus {
-    case connected
-    case disconnected
-    case requiresConnection
-}
-
 final class RXNetworkMonitor {
     static let shared = RXNetworkMonitor()
     
